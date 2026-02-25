@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación K-pop & Capibara - Gia & Lía</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .invitation-card {
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: float 4s ease-in-out infinite;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(0.5deg); }
+            75% { transform: translateY(10px) rotate(-0.5deg); }
+        }
+
+        .header {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #667eea, #764ba2);
+            background-size: 300% 300%;
+            animation: gradientMove 8s ease infinite;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header::before {
+            content: "🎵 🎤 💜 🦫 📸 🎂 🎈";
+            position: absolute;
+            top: 10px;
+            left: 0;
+            right: 0;
+            font-size: 28px;
+            opacity: 0.2;
+            animation: slide 20s linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes slide {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(100%); }
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); text-shadow: 3px 3px 6px rgba(0,0,0,0.4); }
+            50% { transform: scale(1.05); text-shadow: 6px 6px 12px rgba(0,0,0,0.5); }
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        /* Sección de Video */
+        .video-section {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .video-section h2 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Sección de Fotos */
+        .photos-section {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .photos-section h2 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .photo-frame {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            aspect-ratio: 1/1;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .photo-frame:hover img {
+            transform: scale(1.05);
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 20px 10px 10px;
+            font-weight: 600;
+        }
+
+        .names {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .name-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 25px;
+            border-radius: 20px;
+            color: white;
+            min-width: 220px;
+            animation: bounce 3s ease-in-out infinite;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .name-card::after {
+            content: "✨";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 40px;
+            opacity: 0.3;
+            transform: rotate(20deg);
+        }
+
+        .name-card:nth-child(2) {
+            animation-delay: 0.5s;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .name-card h2 {
+            font-size: 2.2em;
+            margin-bottom: 5px;
+        }
+
+        .name-card .age {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        .details {
+            background: linear-gradient(45deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .details::before {
+            content: "⏰ 📍 📅";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 40px;
+            opacity: 0.1;
+            transform: rotate(-10deg);
+        }
+
+        .details p {
+            margin: 15px 0;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .details i {
+            font-size: 1.5em;
+            animation: spin 6s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .theme-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 25px 0;
+            font-size: 2.5em;
+        }
+
+        .theme-icons span {
+            animation: bounce 2s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .theme-icons span:nth-child(2) { animation-delay: 0.2s; }
+        .theme-icons span:nth-child(3) { animation-delay: 0.4s; }
+        .theme-icons span:nth-child(4) { animation-delay: 0.6s; }
+        .theme-icons span:nth-child(5) { animation-delay: 0.8s; }
+
+        /* Sección de Fotos de la Fiesta */
+        .photo-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .photo-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .photo-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .photo-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-decoration: none;
+        }
+
+        .photo-btn.upload {
+            background: #ffd700;
+            color: #764ba2;
+        }
+
+        .photo-btn.upload:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.4);
+        }
+
+        .photo-btn.gallery {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .photo-btn.gallery:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255,107,107,0.4);
+        }
+
+        .qr-codes {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .qr-item {
+            text-align: center;
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .qr-item img {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        /* Formulario RSVP - VERSIÓN CORREGIDA */
+        .rsvp-form {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+        }
+
+        .rsvp-form h2 {
+            color: #764ba2;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+
+        .btn-confirm {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            letter-spacing: 1px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-confirm::before {
+            content: "🎉";
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: left 0.3s;
+        }
+
+        .btn-confirm:hover::before {
+            left: 20px;
+        }
+
+        .btn-confirm:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            padding-left: 60px;
+        }
+
+        .confirmation-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .confirmation-message.success {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .confirmation-message.error {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .confirmation-message.loading {
+            display: block;
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
+        .counter {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 50px;
+            font-size: 1.1em;
+        }
+
+        .counter span {
+            color: #764ba2;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        /* Alerta de próximamente */
+        .coming-soon-alert {
+            background: rgba(255, 215, 0, 0.9);
+            color: #764ba2;
+            padding: 15px;
+            border-radius: 50px;
+            margin: 20px 0;
+            font-weight: bold;
+            animation: pulse 2s ease-in-out infinite;
+            border: 2px solid white;
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .names {
+                gap: 15px;
+            }
+            
+            .name-card {
+                min-width: 140px;
+                padding: 15px;
+            }
+            
+            .name-card h2 {
+                font-size: 1.5em;
+            }
+
+            .photos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-buttons {
+                flex-direction: column;
+            }
+
+            .qr-codes {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="invitation-card">
+        <div class="header">
+            <h1>¡Fiesta de Cumpleaños!</h1>
+            <div class="theme-icons">
+                <span>🎤</span>
+                <span>💜</span>
+                <span>🦫</span>
+                <span>🎵</span>
+                <span>📸</span>
+            </div>
+            <p style="color: white; font-size: 1.3em;">K-pop & Capibara</p>
+        </div>
+
+        <div class="content">
+            <!-- SECCIÓN DE VIDEO -->
+            <div class="video-section">
+                <h2>🎥 Video de Invitación</h2>
+                <div class="video-container">
+                    <video controls poster="https://via.placeholder.com/800x450.png?text=Cargando+video...">
+                        <source src="URL_DE_TU_VIDEO_AQUI.mp4" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+                </div>
+                <p style="margin-top: 10px; color: #666;">✨ Dale play para ver la invitación especial ✨</p>
+            </div>
+
+            <!-- SECCIÓN DE FOTOS DE LAS CUMPLEAÑERAS -->
+            <div class="photos-section">
+                <h2>📸 Las Cumpleañeras</h2>
+                <div class="photos-grid">
+                    <div class="photo-frame">
+                        <img src="URL_FOTO_GIA_AQUI.jpg" alt="Gia Luciana">
+                        <div class="photo-caption">Gia Luciana - 6 años</div>
+                    </div>
+                    <div class="photo-frame">
+                        <img src="URL_FOTO_LIA_AQUI.jpg" alt="Lía Salomé">
+                        <div class="photo-caption">Lía Salomé - 9 años</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NOMBRES Y EDADES -->
+            <div class="names">
+                <div class="name-card">
+                    <h2>Gia Luciana</h2>
+                    <div class="age">6 años</div>
+                </div>
+                <div class="name-card">
+                    <h2>Lía Salomé</h2>
+                    <div class="age">9 años</div>
+                </div>
+            </div>
+
+            <!-- DETALLES DEL EVENTO -->
+            <div class="details">
+                <p>📅 <strong>Fecha:</strong> Sábado 07 de Marzo, 2026</p>
+                <p>⏰ <strong>Hora:</strong> 15:00 hrs.</p>
+                <p>📍 <strong>Lugar:</strong> Salón Social</p>
+                <p>🏠 <strong>Dirección:</strong> Malaquías Concha 0310 - Providencia</p>
+            </div>
+
+            <!-- SECCIÓN DE FOTOS DE LA FIesta (PRÓXIMAMENTE) -->
+            <div class="photo-section">
+                <h2>📸 ¡Comparte los momentos de la fiesta!</h2>
+                
+                <!-- ALERTA DE PRÓXIMAMENTE -->
+                <div class="coming-soon-alert" id="comingSoonAlert">
+                    ⏰ ¡Se habilitará el día de la fiesta! ⏰
+                </div>
+                
+                <div class="photo-buttons">
+                    <button class="photo-btn upload" onclick="mostrarAlertaProximamente()">
+                        <span>📤</span> Sube tu foto aquí
+                    </button>
+                    <button class="photo-btn gallery" onclick="mostrarAlertaProximamente()">
+                        <span>📱</span> Mira la galería de fotos
+                    </button>
+                </div>
+
+                <div class="qr-codes">
+                    <div class="qr-item">
+                        <p>📤 Subir fotos</p>
+                        <img src="https://chart.googleapis.com/chart?chs=120x120&cht=qr&chl=PROXIMAMENTE&choe=UTF-8" alt="QR Subir">
+                        <p style="font-size: 0.8em; margin-top: 5px;">(Próximamente)</p>
+                    </div>
+                    <div class="qr-item">
+                        <p>📱 Ver galería</p>
+                        <img src="https://chart.googleapis.com/chart?chs=120x120&cht=qr&chl=PROXIMAMENTE&choe=UTF-8" alt="QR Galería">
+                        <p style="font-size: 0.8em; margin-top: 5px;">(Próximamente)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORMULARIO DE CONFIRMACIÓN - VERSIÓN CORREGIDA -->
+            <div class="rsvp-form">
+                <h2>✨ Confirma tu asistencia ✨</h2>
+                
+                <!-- Mensajes de estado se mostrarán aquí -->
+                <div id="confirmationMessage" class="confirmation-message"></div>
+
+                <!-- El formulario envía de manera tradicional a un iframe oculto -->
+                <form id="rsvpForm" method="POST" action="https://docs.google.com/forms/d/e/1FAIpQLSfrm1k_l6LbqmO6jNlbl8PtRN9xMEl9rx5h1cPCHjneouVICA/formResponse" target="hidden_iframe">
+                    <div class="form-group">
+                        <label for="nombre-papa">Nombre del papá/mamá:</label>
+                        <input type="text" name="entry.737325315" id="nombre-papa" placeholder="Ej: Juan Pérez" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombre-nino">Nombre del niño/niña:</label>
+                        <input type="text" name="entry.1918157578" id="nombre-nino" placeholder="Ej: Sofía" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edad-nino">Edad del niño/niña:</label>
+                        <select name="entry.1274110648" id="edad-nino" required>
+                            <option value="">Selecciona una edad</option>
+                            <option value="1 año">1 año</option>
+                            <option value="2 años">2 años</option>
+                            <option value="3 años">3 años</option>
+                            <option value="4 años">4 años</option>
+                            <option value="5 años">5 años</option>
+                            <option value="6 años">6 años</option>
+                            <option value="7 años">7 años</option>
+                            <option value="8 años">8 años</option>
+                            <option value="9 años">9 años</option>
+                            <option value="10 años">10 años</option>
+                            <option value="11 años">11 años</option>
+                            <option value="12 años">12 años</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmacion">Confirmación:</label>
+                        <select name="entry.1095325344" id="confirmacion" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="Si, asistiré">✅ ¡Sí, asistiré!</option>
+                            <option value="No podré asistir">❌ No podré asistir</option>
+                            <option value="Tal vez, confirmaré después">🤔 Tal vez, confirmaré después</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-confirm" id="btnEnviarForm">
+                        Confirmar Asistencia
+                    </button>
+                </form>
+                <!-- Iframe oculto para recibir la respuesta del formulario sin recargar la página -->
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted) { mostrarExitoPostEnvio(); }"></iframe>
+                
+                <div class="counter" id="counter">
+                    <p>🎉 <span id="asistentesCount">0</span> familias han confirmado</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // VARIABLES GLOBALES
+        // ============================================
+        window.submitted = false; // Bandera para saber si el envío fue intencional
+        
+        // ============================================
+        // GESTIÓN DE CONFIRMACIONES LOCALES (Contador)
+        // ============================================
+        let confirmaciones = JSON.parse(localStorage.getItem('confirmacionesFiesta')) || [];
+        
+        function actualizarContador() {
+            const asistentes = confirmaciones.filter(c => c.confirmacion === 'Si, asistiré').length;
+            document.getElementById('asistentesCount').textContent = asistentes;
+        }
+
+        // Función para mostrar mensajes
+        function mostrarMensaje(tipo, texto) {
+            const messageDiv = document.getElementById('confirmationMessage');
+            messageDiv.className = `confirmation-message ${tipo}`;
+            messageDiv.textContent = texto;
+            
+            // Ocultar después de 8 segundos
+            setTimeout(() => {
+                messageDiv.className = 'confirmation-message';
+            }, 8000);
+        }
+
+        // Función que se llama cuando el iframe carga después de un envío exitoso
+        function mostrarExitoPostEnvio() {
+            if (window.submitted) {
+                // Obtener valores del formulario para guardarlos localmente y mostrar mensaje
+                const nombrePapa = document.getElementById('nombre-papa').value;
+                const nombreNino = document.getElementById('nombre-nino').value;
+                const edadNino = document.getElementById('edad-nino').value;
+                const confirmacion = document.getElementById('confirmacion').value;
+
+                // Guardar en localStorage para el contador
+                const datos = {
+                    nombrePapa,
+                    nombreNino,
+                    edadNino,
+                    confirmacion,
+                    fecha: new Date().toISOString()
+                };
+                confirmaciones.push(datos);
+                localStorage.setItem('confirmacionesFiesta', JSON.stringify(confirmaciones));
+                actualizarContador();
+
+                // Mostrar mensaje de éxito personalizado
+                let mensajeExito = '';
+                if (confirmacion === 'Si, asistiré') {
+                    mensajeExito = '✅ ¡Gracias por confirmar! Te esperamos en la fiesta.';
+                } else if (confirmacion === 'No podré asistir') {
+                    mensajeExito = '😢 Lamentamos que no puedas asistir. ¡Gracias por avisar!';
+                } else {
+                    mensajeExito = '👍 Esperamos tu confirmación. ¡Mantente atento!';
+                }
+                mostrarMensaje('success', mensajeExito);
+
+                // Limpiar el formulario
+                document.getElementById('rsvpForm').reset();
+
+                // Resetear la bandera
+                window.submitted = false;
+            }
+        }
+
+        // Interceptar el envío del formulario para manejar la bandera
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            // No prevenimos el envío real, pero marcamos la bandera justo antes de que ocurra
+            window.submitted = true;
+            
+            // Mostrar un mensaje de "enviando..."
+            mostrarMensaje('loading', '⏳ Enviando confirmación...');
+            
+            // El formulario se enviará naturalmente al iframe gracias al atributo target
+            // La función mostrarExitoPostEnvio se ejecutará cuando el iframe cargue la respuesta de Google.
+        });
+
+        // Función para la alerta de próximamente
+        function mostrarAlertaProximamente() {
+            alert('📸 ¡Esta función se habilitará el día de la fiesta! 🎉\n\nTe esperamos el 07 de Marzo para compartir tus fotos.');
+        }
+
+        // Inicializar contador
+        actualizarContador();
+    </script>
+</body>
+</html>
