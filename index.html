@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Invitación K-pop & Capibara - Gia & Lía</title>
     <style>
+        /* Mismos estilos que antes - los mantienes */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
         
         * {
@@ -99,7 +100,6 @@
             padding: 20px;
         }
 
-        /* Sección de Video - Vertical estilo Instagram Story */
         .video-section {
             margin-bottom: 20px;
             text-align: center;
@@ -129,7 +129,6 @@
             object-fit: cover;
         }
 
-        /* Sección de Fotos */
         .photos-section {
             margin-bottom: 20px;
             text-align: center;
@@ -275,7 +274,6 @@
         .theme-icons span:nth-child(4) { animation-delay: 0.6s; }
         .theme-icons span:nth-child(5) { animation-delay: 0.8s; }
 
-        /* Sección de Confirmación */
         .rsvp-form {
             background: white;
             padding: 20px;
@@ -398,7 +396,6 @@
             font-size: 1.3em;
         }
 
-        /* Sección de Fotos de la Fiesta */
         .photo-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 20px;
@@ -501,7 +498,6 @@
             font-size: 0.9em;
         }
 
-        /* Control de música */
         .music-control {
             position: fixed;
             bottom: 20px;
@@ -566,12 +562,12 @@
 <body>
     <!-- Control de música -->
     <div class="music-control" id="musicControl" onclick="toggleMusic()">
-        🔊
+        🔈
     </div>
 
-    <!-- Audio de fondo -->
+    <!-- Audio de fondo (ARCHIVO LOCAL) -->
     <audio id="bgMusic" loop preload="auto">
-        <source src="https://drive.google.com/uc?export=download&id=1q7t0yfwzGWqdeDNGSxaleXvyQQ0jP3oQ" type="audio/mpeg">
+        <source src="assets/Hauntrix.mp3" type="audio/mpeg">
         Tu navegador no soporta audio.
     </audio>
 
@@ -589,28 +585,28 @@
         </div>
 
         <div class="content">
-            <!-- SECCIÓN DE VIDEO -->
+            <!-- SECCIÓN DE VIDEO (ARCHIVO LOCAL) -->
             <div class="video-section">
                 <h2>🎥 Video de Invitación</h2>
                 <div class="video-container">
-                    <video controls poster="https://drive.google.com/thumbnail?id=159iM3sUmkuQ5q8se5Yc2TBze2sgqhKoQ&sz=w1000">
-                        <source src="https://drive.google.com/uc?export=download&id=159iM3sUmkuQ5q8se5Yc2TBze2sgqhKoQ" type="video/mp4">
+                    <video controls poster="assets/poster.jpg">
+                        <source src="assets/videoinvitacion.mp4" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
                 <p style="margin-top: 8px; color: #666; font-size: 0.9em;">✨ Video de invitación ✨</p>
             </div>
 
-            <!-- SECCIÓN DE FOTOS DE LAS CUMPLEAÑERAS -->
+            <!-- SECCIÓN DE FOTOS DE LAS CUMPLEAÑERAS (ARCHIVOS LOCALES) -->
             <div class="photos-section">
                 <h2>📸 Las Cumpleañeras</h2>
                 <div class="photos-grid">
                     <div class="photo-frame">
-                        <img src="https://drive.google.com/uc?export=download&id=1Bn2hOeMKWcqKwfy_j5NbN1jJ_X65Ecgz" alt="Gia Luciana">
+                        <img src="assets/gia.jpg" alt="Gia Luciana">
                         <div class="photo-caption">Gia Luciana - 6 años</div>
                     </div>
                     <div class="photo-frame">
-                        <img src="https://drive.google.com/uc?export=download&id=15jFyED3CDag89q7zEcAhbd_4dNFbNrnT" alt="Lía Salomé">
+                        <img src="assets/lia.jpg" alt="Lía Salomé">
                         <div class="photo-caption">Lía Salomé - 9 años</div>
                     </div>
                 </div>
@@ -642,7 +638,6 @@
                 
                 <div id="confirmationMessage" class="confirmation-message"></div>
 
-                <!-- Iframe oculto para recibir la respuesta -->
                 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
                 <form id="rsvpForm" action="https://framaforms.org/confirmar-asistencia-gialia-1772071202" method="POST" target="hidden_iframe">
@@ -672,7 +667,6 @@
                         </select>
                     </div>
 
-                    <!-- Campos ocultos de Framaforms -->
                     <input type="hidden" name="form_build_id" value="form-yM_7X5jQkQkQkQkQkQkQkQkQkQkQkQkQkQkQkQkQ">
                     <input type="hidden" name="form_id" value="webform_client_form_1772071202">
                     <input type="hidden" name="webform_id" value="1772071202">
@@ -721,14 +715,6 @@
     </div>
 
     <script>
-        // ============================================
-        // IDs de tus archivos (YA CONFIGURADOS)
-        // ============================================
-        const VIDEO_ID = '159iM3sUmkuQ5q8se5Yc2TBze2sgqhKoQ';
-        const AUDIO_ID = '1q7t0yfwzGWqdeDNGSxaleXvyQQ0jP3oQ';
-        const FOTO_GIA_ID = '1Bn2hOeMKWcqKwfy_j5NbN1jJ_X65Ecgz';
-        const FOTO_LIA_ID = '15jFyED3CDag89q7zEcAhbd_4dNFbNrnT';
-        
         // ============================================
         // CONTROL DE MÚSICA
         // ============================================
@@ -779,16 +765,13 @@
             document.getElementById('asistentesCount').textContent = asistentes;
         }
         
-        // Detectar cuando el iframe carga (envío completado)
         document.getElementById('hidden_iframe').onload = function() {
             if (envioExitoso) {
-                // Obtener valores del formulario
                 const nombre = document.getElementById('nombre').value.trim();
                 const adultos = document.getElementById('adultos').value;
                 const ninos = document.getElementById('ninos').value;
                 const confirmacion = document.getElementById('confirmacion').value;
                 
-                // Guardar en localStorage
                 const nuevaConfirmacion = {
                     nombre: nombre,
                     adultos: adultos,
@@ -801,7 +784,6 @@
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(confirmaciones));
                 actualizarContador();
                 
-                // Mensaje de éxito
                 let mensajeExito = '';
                 if (confirmacion === '1') {
                     mensajeExito = '✅ ¡Gracias por confirmar! Te esperamos en la fiesta.';
@@ -813,7 +795,6 @@
                 
                 mostrarMensaje('success', mensajeExito);
                 
-                // Limpiar formulario
                 document.getElementById('rsvpForm').reset();
                 document.getElementById('adultos').value = '1';
                 document.getElementById('ninos').value = '0';
@@ -822,7 +803,6 @@
             }
         };
         
-        // Manejar envío del formulario
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             const nombre = document.getElementById('nombre').value.trim();
             const adultos = document.getElementById('adultos').value;
@@ -835,11 +815,9 @@
                 return false;
             }
             
-            // Marcar que el envío fue exitoso
             envioExitoso = true;
             mostrarMensaje('loading', '⏳ Enviando confirmación...');
             
-            // El formulario se envía al iframe
             return true;
         });
         
