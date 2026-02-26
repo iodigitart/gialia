@@ -573,7 +573,7 @@
 
     <div class="invitation-card">
         <div class="header">
-            <h1>¡Fiesta de Cumpleaños!</h1>
+            <h1>¡ESTÁS INVITADO(A) A LA DIVERSIÓN!</h1>
             <div class="theme-icons">
                 <span>🎤</span>
                 <span>💜</span>
@@ -581,7 +581,7 @@
                 <span>🎵</span>
                 <span>📸</span>
             </div>
-            <p style="color: white; font-size: 1.1em;">K-pop & Capibara</p>
+            <p style="color: white; font-size: 1.1em;">Fiesta de Cumpleaños</p>
         </div>
 
         <div class="content">
@@ -612,18 +612,6 @@
                 </div>
             </div>
 
-            <!-- NOMBRES Y EDADES -->
-            <div class="names">
-                <div class="name-card">
-                    <h2>Gia Luciana</h2>
-                    <div class="age">6 años</div>
-                </div>
-                <div class="name-card">
-                    <h2>Lía Salomé</h2>
-                    <div class="age">9 años</div>
-                </div>
-            </div>
-
             <!-- DETALLES DEL EVENTO -->
             <div class="details">
                 <p>📅 <strong>Fecha:</strong> Sábado 07 Marzo, 2026</p>
@@ -632,54 +620,117 @@
                 <p>🏠 <strong>Dirección:</strong> Malaquías Concha 0310 - Providencia</p>
             </div>
 
-            <!-- SECCIÓN DE CONFIRMACIÓN -->
-            <div class="rsvp-form">
-                <h2>✨ Confirma tu asistencia ✨</h2>
-                
-                <div id="confirmationMessage" class="confirmation-message"></div>
+            <!-- SECCIÓN DE CONFIRMACIÓN - CÓDIGO DIRECTO DE FRAMAFORMS -->
+<div class="rsvp-form">
+    <h2 style="color: #764ba2; margin-bottom: 20px; text-align: center;">✨ Confirma tu asistencia ✨</h2>
+    
+    <div id="confirmationMessage" class="confirmation-message" style="display: none;"></div>
 
-                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+    <!-- FORMULARIO DIRECTO DE FRAMAFORMS -->
+    <form id="rsvpForm" action="https://framaforms.org/confirmar-asistencia-gialia-1772071202" method="post" accept-charset="UTF-8">
+        
+        <div class="form-group">
+            <label for="edit-submitted-new-1772071301030">Tu Nombre <span style="color: #999; font-size: 0.85em;">(Adulto, niño/a o ambos)</span></label>
+            <input type="text" id="edit-submitted-new-1772071301030" name="submitted[new_1772071301030]" value="" size="60" maxlength="128" class="form-text" required>
+        </div>
 
-                <form id="rsvpForm" action="https://framaforms.org/confirmar-asistencia-gialia-1772071202" method="POST" target="hidden_iframe">
-                    
-                    <div class="form-group">
-                        <label for="nombre">Tu Nombre <span style="color: #999; font-size: 0.85em;">(Adulto, niño/a o ambos)</span></label>
-                        <input type="text" id="nombre" name="submitted[new_1772071301030]" placeholder="Ej: Juan Pérez" required>
-                    </div>
+        <div class="form-group">
+            <label for="edit-submitted-new-1772071449722">¿Cuántos adultos asistirán?</label>
+            <input type="number" id="edit-submitted-new-1772071449722" name="submitted[new_1772071449722]" min="0" max="20" step="1" value="1" class="form-text form-number" required>
+        </div>
 
-                    <div class="form-group">
-                        <label for="adultos">¿Cuántos adultos asistirán?</label>
-                        <input type="number" id="adultos" name="submitted[new_1772071449722]" min="0" max="20" step="1" value="1" required>
-                    </div>
+        <div class="form-group">
+            <label for="edit-submitted-new-1772071502590">¿Cuántos niños(as) asistirán?</label>
+            <input type="number" id="edit-submitted-new-1772071502590" name="submitted[new_1772071502590]" min="0" max="20" step="1" value="0" class="form-text form-number" required>
+        </div>
 
-                    <div class="form-group">
-                        <label for="ninos">¿Cuántos niños(as) asistirán?</label>
-                        <input type="number" id="ninos" name="submitted[new_1772071502590]" min="0" max="20" step="1" value="0" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirmacion">Confirmar asistencia:</label>
-                        <select id="confirmacion" name="submitted[new_1772071539642]" required>
-                            <option value="">Selecciona una opción</option>
-                            <option value="1">✅ Sí, asistiré</option>
-                            <option value="2">❌ No podré asistir</option>
-                            <option value="3">🤔 Tal vez</option>
-                        </select>
-                    </div>
-
-                    <input type="hidden" name="form_build_id" value="form-yM_7X5jQkQkQkQkQkQkQkQkQkQkQkQkQkQkQkQkQ">
-                    <input type="hidden" name="form_id" value="webform_client_form_1772071202">
-                    <input type="hidden" name="webform_id" value="1772071202">
-
-                    <button type="submit" class="btn-confirm" id="submitBtn">
-                        Enviar Confirmación
-                    </button>
-                </form>
-                
-                <div class="counter" id="counter">
-                    <p>🎉 <span id="asistentesCount">0</span> familias han confirmado</p>
-                </div>
+        <div class="form-group">
+            <label>Confirmar asistencia:</label>
+            <div style="display: flex; gap: 20px; justify-content: center; margin-top: 10px;">
+                <label style="display: flex; align-items: center; gap: 5px;">
+                    <input type="radio" name="submitted[new_1772071539642]" value="1" required> ✅ Sí
+                </label>
+                <label style="display: flex; align-items: center; gap: 5px;">
+                    <input type="radio" name="submitted[new_1772071539642]" value="2" required> ❌ No
+                </label>
+                <label style="display: flex; align-items: center; gap: 5px;">
+                    <input type="radio" name="submitted[new_1772071539642]" value="3" required> 🤔 Tal vez
+                </label>
             </div>
+        </div>
+
+        <!-- Campos ocultos necesarios para Framaforms -->
+        <input type="hidden" name="form_build_id" value="form-yM_7X5jQkQkQkQkQkQkQkQkQkQkQkQkQkQkQkQkQ">
+        <input type="hidden" name="form_id" value="webform_client_form_1772071202">
+        <input type="hidden" name="webform_id" value="1772071202">
+
+        <button type="submit" class="btn-confirm" id="submitBtn">
+            Enviar Confirmación
+        </button>
+    </form>
+    
+    <!-- Contador local (solo visible para el usuario) -->
+    <div class="counter" style="margin-top: 20px;">
+        <p>🎉 <span id="asistentesCount">0</span> familias han confirmado (según tu navegador)</p>
+    </div>
+</div>
+
+<script>
+    // ============================================
+    // GESTIÓN DE CONFIRMACIONES LOCALES (SOLO CONTADOR)
+    // ============================================
+    
+    const STORAGE_KEY = 'confirmacionesFiestaGiaLia';
+    let confirmaciones = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    
+    function actualizarContador() {
+        const asistentes = confirmaciones.filter(c => c.confirmacion === '1' || c.confirmacion === 'Si, asistiré').length;
+        document.getElementById('asistentesCount').textContent = asistentes;
+    }
+    
+    // Manejar envío del formulario
+    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+        // Validar que todos los campos estén llenos
+        const nombre = document.getElementById('edit-submitted-new-1772071301030').value.trim();
+        const adultos = document.getElementById('edit-submitted-new-1772071449722').value;
+        const ninos = document.getElementById('edit-submitted-new-1772071502590').value;
+        const confirmacion = document.querySelector('input[name="submitted[new_1772071539642]"]:checked');
+        
+        if (!nombre || !adultos || !ninos || !confirmacion) {
+            e.preventDefault();
+            const messageDiv = document.getElementById('confirmationMessage');
+            messageDiv.style.display = 'block';
+            messageDiv.className = 'confirmation-message error';
+            messageDiv.textContent = '❌ Por favor, completa todos los campos';
+            setTimeout(() => messageDiv.style.display = 'none', 3000);
+            return false;
+        }
+        
+        // Guardar en localStorage para el contador local
+        const nuevaConfirmacion = {
+            nombre: nombre,
+            adultos: adultos,
+            ninos: ninos,
+            confirmacion: confirmacion.value,
+            fecha: new Date().toLocaleString('es-CL')
+        };
+        
+        confirmaciones.push(nuevaConfirmacion);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(confirmaciones));
+        actualizarContador();
+        
+        // Mostrar mensaje de éxito
+        const messageDiv = document.getElementById('confirmationMessage');
+        messageDiv.style.display = 'block';
+        messageDiv.className = 'confirmation-message success';
+        messageDiv.textContent = '✅ ¡Gracias por confirmar! Redirigiendo...';
+        
+        // El formulario se envía normalmente a Framaforms
+        return true;
+    });
+    
+    actualizarContador();
+</script>
 
             <!-- SECCIÓN DE FOTOS DE LA FIESTA -->
             <div class="photo-section">
