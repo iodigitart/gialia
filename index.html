@@ -566,12 +566,12 @@
 <body>
     <!-- Control de música -->
     <div class="music-control" id="musicControl" onclick="toggleMusic()">
-        🔈
+        🔊
     </div>
 
     <!-- Audio de fondo -->
     <audio id="bgMusic" loop preload="auto">
-        <source src="https://drive.google.com/uc?export=view&id=ID_DEL_AUDIO_AQUI" type="audio/mpeg">
+        <source src="https://drive.google.com/uc?export=download&id=1q7t0yfwzGWqdeDNGSxaleXvyQQ0jP3oQ" type="audio/mpeg">
         Tu navegador no soporta audio.
     </audio>
 
@@ -594,7 +594,7 @@
                 <h2>🎥 Video de Invitación</h2>
                 <div class="video-container">
                     <video controls poster="https://drive.google.com/thumbnail?id=159iM3sUmkuQ5q8se5Yc2TBze2sgqhKoQ&sz=w1000">
-                        <source src="https://drive.google.com/uc?export=view&id=159iM3sUmkuQ5q8se5Yc2TBze2sgqhKoQ" type="video/mp4">
+                        <source src="https://drive.google.com/uc?export=download&id=159iM3sUmkuQ5q8se5Yc2TBze2sgqhKoQ" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
@@ -606,11 +606,11 @@
                 <h2>📸 Las Cumpleañeras</h2>
                 <div class="photos-grid">
                     <div class="photo-frame">
-                        <img src="https://drive.google.com/uc?export=view&id=1Bn2hOeMKWcqKwfy_j5NbN1jJ_X65Ecgz" alt="Gia Luciana">
+                        <img src="https://drive.google.com/uc?export=download&id=1Bn2hOeMKWcqKwfy_j5NbN1jJ_X65Ecgz" alt="Gia Luciana">
                         <div class="photo-caption">Gia Luciana - 6 años</div>
                     </div>
                     <div class="photo-frame">
-                        <img src="URL_FOTO_LIA_AQUI.jpg" alt="Lía Salomé">
+                        <img src="https://drive.google.com/uc?export=download&id=15jFyED3CDag89q7zEcAhbd_4dNFbNrnT" alt="Lía Salomé">
                         <div class="photo-caption">Lía Salomé - 9 años</div>
                     </div>
                 </div>
@@ -636,7 +636,7 @@
                 <p>🏠 <strong>Dirección:</strong> Malaquías Concha 0310 - Providencia</p>
             </div>
 
-            <!-- SECCIÓN DE CONFIRMACIÓN - MÉTODO 100% EFECTIVO -->
+            <!-- SECCIÓN DE CONFIRMACIÓN -->
             <div class="rsvp-form">
                 <h2>✨ Confirma tu asistencia ✨</h2>
                 
@@ -722,17 +722,12 @@
 
     <script>
         // ============================================
-        // CONFIGURACIÓN - REEMPLAZA CON TUS IDs
+        // IDs de tus archivos (YA CONFIGURADOS)
         // ============================================
-        const AUDIO_ID = 'ID_DEL_AUDIO_AQUI'; // Reemplaza con el ID de tu canción
-        const FOTO_LIA_ID = 'ID_FOTO_LIA_AQUI'; // Reemplaza con el ID de la foto de Lía
-        
-        // ============================================
-        // ACTUALIZAR URLs DE ARCHIVOS
-        // ============================================
-        if (FOTO_LIA_ID !== 'ID_FOTO_LIA_AQUI') {
-            document.querySelector('.photo-frame:last-child img').src = `https://drive.google.com/uc?export=view&id=${FOTO_LIA_ID}`;
-        }
+        const VIDEO_ID = '159iM3sUmkuQ5q8se5Yc2TBze2sgqhKoQ';
+        const AUDIO_ID = '1q7t0yfwzGWqdeDNGSxaleXvyQQ0jP3oQ';
+        const FOTO_GIA_ID = '1Bn2hOeMKWcqKwfy_j5NbN1jJ_X65Ecgz';
+        const FOTO_LIA_ID = '15jFyED3CDag89q7zEcAhbd_4dNFbNrnT';
         
         // ============================================
         // CONTROL DE MÚSICA
@@ -741,10 +736,6 @@
         const audio = document.getElementById('bgMusic');
         const musicControl = document.getElementById('musicControl');
         
-        if (AUDIO_ID !== 'ID_DEL_AUDIO_AQUI') {
-            audio.src = `https://drive.google.com/uc?export=view&id=${AUDIO_ID}`;
-        }
-        
         function toggleMusic() {
             if (musicaActivada) {
                 audio.pause();
@@ -752,15 +743,21 @@
                 musicControl.classList.remove('playing');
                 musicaActivada = false;
             } else {
-                audio.play();
-                musicControl.innerHTML = '🔊';
-                musicControl.classList.add('playing');
-                musicaActivada = true;
+                audio.play()
+                    .then(() => {
+                        musicControl.innerHTML = '🔊';
+                        musicControl.classList.add('playing');
+                        musicaActivada = true;
+                    })
+                    .catch(error => {
+                        console.log('Error al reproducir:', error);
+                        alert('Haz clic en la página primero para reproducir la música');
+                    });
             }
         }
 
         // ============================================
-        // GESTIÓN DE CONFIRMACIONES - MÉTODO CON IFRAME
+        // GESTIÓN DE CONFIRMACIONES
         // ============================================
         
         const STORAGE_KEY = 'confirmacionesFiestaGiaLia';
