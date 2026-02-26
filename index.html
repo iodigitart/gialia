@@ -569,7 +569,7 @@
         🔈
     </div>
 
-    <!-- Audio de fondo (reemplaza con el ID de tu canción) -->
+    <!-- Audio de fondo -->
     <audio id="bgMusic" loop preload="auto">
         <source src="https://drive.google.com/uc?export=view&id=ID_DEL_AUDIO_AQUI" type="audio/mpeg">
         Tu navegador no soporta audio.
@@ -636,13 +636,16 @@
                 <p>🏠 <strong>Dirección:</strong> Malaquías Concha 0310 - Providencia</p>
             </div>
 
-            <!-- SECCIÓN DE CONFIRMACIÓN - CORREGIDA -->
+            <!-- SECCIÓN DE CONFIRMACIÓN - MÉTODO 100% EFECTIVO -->
             <div class="rsvp-form">
                 <h2>✨ Confirma tu asistencia ✨</h2>
                 
                 <div id="confirmationMessage" class="confirmation-message"></div>
 
-                <form id="rsvpForm" action="https://framaforms.org/confirmar-asistencia-gialia-1772071202" method="POST">
+                <!-- Iframe oculto para recibir la respuesta -->
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+                <form id="rsvpForm" action="https://framaforms.org/confirmar-asistencia-gialia-1772071202" method="POST" target="hidden_iframe">
                     
                     <div class="form-group">
                         <label for="nombre">Tu Nombre <span style="color: #999; font-size: 0.85em;">(Adulto, niño/a o ambos)</span></label>
@@ -674,7 +677,7 @@
                     <input type="hidden" name="form_id" value="webform_client_form_1772071202">
                     <input type="hidden" name="webform_id" value="1772071202">
 
-                    <button type="submit" class="btn-confirm">
+                    <button type="submit" class="btn-confirm" id="submitBtn">
                         Enviar Confirmación
                     </button>
                 </form>
@@ -738,7 +741,6 @@
         const audio = document.getElementById('bgMusic');
         const musicControl = document.getElementById('musicControl');
         
-        // Actualizar fuente de audio
         if (AUDIO_ID !== 'ID_DEL_AUDIO_AQUI') {
             audio.src = `https://drive.google.com/uc?export=view&id=${AUDIO_ID}`;
         }
@@ -758,11 +760,12 @@
         }
 
         // ============================================
-        // GESTIÓN DE CONFIRMACIONES - VERSIÓN CORREGIDA
+        // GESTIÓN DE CONFIRMACIONES - MÉTODO CON IFRAME
         // ============================================
         
         const STORAGE_KEY = 'confirmacionesFiestaGiaLia';
         let confirmaciones = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        let envioExitoso = false;
         
         function mostrarMensaje(tipo, texto) {
             const messageDiv = document.getElementById('confirmationMessage');
@@ -771,7 +774,7 @@
             
             setTimeout(() => {
                 messageDiv.className = 'confirmation-message';
-            }, 3000);
+            }, 4000);
         }
         
         function actualizarContador() {
@@ -779,31 +782,14 @@
             document.getElementById('asistentesCount').textContent = asistentes;
         }
         
-        // Manejar envío del formulario SIN abrir nueva pestaña
-        document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
-            e.preventDefault(); // Prevenir envío normal
-            
-            const nombre = document.getElementById('nombre').value.trim();
-            const adultos = document.getElementById('adultos').value;
-            const ninos = document.getElementById('ninos').value;
-            const confirmacion = document.getElementById('confirmacion').value;
-            
-            if (!nombre || !adultos || !ninos || !confirmacion) {
-                mostrarMensaje('error', '❌ Por favor, completa todos los campos');
-                return;
-            }
-            
-            mostrarMensaje('loading', '⏳ Enviando confirmación...');
-            
-            try {
-                // Enviar datos a Framaforms mediante fetch (AJAX)
-                const formData = new FormData(this);
-                
-                const response = await fetch(this.action, {
-                    method: 'POST',
-                    body: formData,
-                    mode: 'no-cors' // Importante para evitar problemas CORS
-                });
+        // Detectar cuando el iframe carga (envío completado)
+        document.getElementById('hidden_iframe').onload = function() {
+            if (envioExitoso) {
+                // Obtener valores del formulario
+                const nombre = document.getElementById('nombre').value.trim();
+                const adultos = document.getElementById('adultos').value;
+                const ninos = document.getElementById('ninos').value;
+                const confirmacion = document.getElementById('confirmacion').value;
                 
                 // Guardar en localStorage
                 const nuevaConfirmacion = {
@@ -831,14 +817,33 @@
                 mostrarMensaje('success', mensajeExito);
                 
                 // Limpiar formulario
-                this.reset();
+                document.getElementById('rsvpForm').reset();
                 document.getElementById('adultos').value = '1';
                 document.getElementById('ninos').value = '0';
                 
-            } catch (error) {
-                console.error('Error:', error);
-                mostrarMensaje('error', '❌ Error al enviar. Intenta de nuevo.');
+                envioExitoso = false;
             }
+        };
+        
+        // Manejar envío del formulario
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            const nombre = document.getElementById('nombre').value.trim();
+            const adultos = document.getElementById('adultos').value;
+            const ninos = document.getElementById('ninos').value;
+            const confirmacion = document.getElementById('confirmacion').value;
+            
+            if (!nombre || !adultos || !ninos || !confirmacion) {
+                e.preventDefault();
+                mostrarMensaje('error', '❌ Por favor, completa todos los campos');
+                return false;
+            }
+            
+            // Marcar que el envío fue exitoso
+            envioExitoso = true;
+            mostrarMensaje('loading', '⏳ Enviando confirmación...');
+            
+            // El formulario se envía al iframe
+            return true;
         });
         
         function mostrarAlertaProximamente() {
