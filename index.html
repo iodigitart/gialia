@@ -32,7 +32,7 @@
         }
 
         .invitation-card {
-            max-width: 450px; /* Ancho estilo Instagram Story */
+            max-width: 450px;
             width: 100%;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 30px;
@@ -119,7 +119,8 @@
             border-radius: 30px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            aspect-ratio: 9/16; /* Relación de aspecto vertical (Instagram Story) */
+            aspect-ratio: 9/16;
+            background: #000;
         }
 
         .video-container video {
@@ -397,7 +398,7 @@
             font-size: 1.3em;
         }
 
-        /* Sección de Fotos de la Fiesta (después de confirmación) */
+        /* Sección de Fotos de la Fiesta */
         .photo-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 20px;
@@ -500,7 +501,7 @@
             font-size: 0.9em;
         }
 
-        /* Botón de música */
+        /* Control de música */
         .music-control {
             position: fixed;
             bottom: 20px;
@@ -568,9 +569,9 @@
         🔈
     </div>
 
-    <!-- Audio de fondo (oculto) -->
+    <!-- Audio de fondo (reemplaza con el ID de tu canción) -->
     <audio id="bgMusic" loop preload="auto">
-        <source src="URL_DE_TU_CANCION_AQUI.mp3" type="audio/mpeg">
+        <source src="https://drive.google.com/uc?export=view&id=ID_DEL_AUDIO_AQUI" type="audio/mpeg">
         Tu navegador no soporta audio.
     </audio>
 
@@ -588,16 +589,16 @@
         </div>
 
         <div class="content">
-            <!-- SECCIÓN DE VIDEO (Vertical estilo Instagram Story) -->
+            <!-- SECCIÓN DE VIDEO -->
             <div class="video-section">
                 <h2>🎥 Video de Invitación</h2>
                 <div class="video-container">
-                    <video controls poster="https://drive.google.com/uc?export=view&id=159iM3sUmkuQ5q8se5Yc2TBze2sgqhKoQ">
-                        <source src="https://drive.google.com/uc?export=download&id=159iM3sUmkuQ5q8se5Yc2TBze2sgqhKoQ" type="video/mp4">
+                    <video controls poster="https://drive.google.com/thumbnail?id=159iM3sUmkuQ5q8se5Yc2TBze2sgqhKoQ&sz=w1000">
+                        <source src="https://drive.google.com/uc?export=view&id=159iM3sUmkuQ5q8se5Yc2TBze2sgqhKoQ" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
                 </div>
-                <p style="margin-top: 8px; color: #666; font-size: 0.9em;">✨ Desliza para ver la invitación ✨</p>
+                <p style="margin-top: 8px; color: #666; font-size: 0.9em;">✨ Video de invitación ✨</p>
             </div>
 
             <!-- SECCIÓN DE FOTOS DE LAS CUMPLEAÑERAS -->
@@ -635,35 +636,29 @@
                 <p>🏠 <strong>Dirección:</strong> Malaquías Concha 0310 - Providencia</p>
             </div>
 
-            <!-- SECCIÓN DE CONFIRMACIÓN (ANTES DE LAS FOTOS DEL EVENTO) -->
+            <!-- SECCIÓN DE CONFIRMACIÓN - CORREGIDA -->
             <div class="rsvp-form">
                 <h2>✨ Confirma tu asistencia ✨</h2>
                 
-                <!-- Mensajes de estado -->
                 <div id="confirmationMessage" class="confirmation-message"></div>
 
-                <!-- Formulario de Framaforms -->
-                <form id="rsvpForm" action="https://framaforms.org/confirmar-asistencia-gialia-1772071202" method="POST" target="_blank">
+                <form id="rsvpForm" action="https://framaforms.org/confirmar-asistencia-gialia-1772071202" method="POST">
                     
-                    <!-- Campo: Nombre -->
                     <div class="form-group">
                         <label for="nombre">Tu Nombre <span style="color: #999; font-size: 0.85em;">(Adulto, niño/a o ambos)</span></label>
                         <input type="text" id="nombre" name="submitted[new_1772071301030]" placeholder="Ej: Juan Pérez" required>
                     </div>
 
-                    <!-- Campo: Adultos asistentes -->
                     <div class="form-group">
                         <label for="adultos">¿Cuántos adultos asistirán?</label>
                         <input type="number" id="adultos" name="submitted[new_1772071449722]" min="0" max="20" step="1" value="1" required>
                     </div>
 
-                    <!-- Campo: Niños asistentes -->
                     <div class="form-group">
                         <label for="ninos">¿Cuántos niños(as) asistirán?</label>
                         <input type="number" id="ninos" name="submitted[new_1772071502590]" min="0" max="20" step="1" value="0" required>
                     </div>
 
-                    <!-- Campo: Confirmación -->
                     <div class="form-group">
                         <label for="confirmacion">Confirmar asistencia:</label>
                         <select id="confirmacion" name="submitted[new_1772071539642]" required>
@@ -674,7 +669,7 @@
                         </select>
                     </div>
 
-                    <!-- Campos ocultos necesarios para Framaforms -->
+                    <!-- Campos ocultos de Framaforms -->
                     <input type="hidden" name="form_build_id" value="form-yM_7X5jQkQkQkQkQkQkQkQkQkQkQkQkQkQkQkQkQ">
                     <input type="hidden" name="form_id" value="webform_client_form_1772071202">
                     <input type="hidden" name="webform_id" value="1772071202">
@@ -689,11 +684,10 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN DE FOTOS DE LA FIESTA (DESPUÉS DE CONFIRMACIÓN) -->
+            <!-- SECCIÓN DE FOTOS DE LA FIESTA -->
             <div class="photo-section">
                 <h2>📸 ¡Comparte los momentos de la fiesta!</h2>
                 
-                <!-- ALERTA DE PRÓXIMAMENTE -->
                 <div class="coming-soon-alert">
                     ⏰ ¡Se habilitará el día de la fiesta! ⏰
                 </div>
@@ -725,34 +719,29 @@
 
     <script>
         // ============================================
-        // CONFIGURACIÓN - REEMPLAZA CON TU URL DE MÚSICA
+        // CONFIGURACIÓN - REEMPLAZA CON TUS IDs
         // ============================================
-        const MUSICA_URL = 'URL_DE_TU_CANCION_AQUI.mp3'; // Ej: https://drive.google.com/uc?export=download&id=12345
+        const AUDIO_ID = 'ID_DEL_AUDIO_AQUI'; // Reemplaza con el ID de tu canción
+        const FOTO_LIA_ID = 'ID_FOTO_LIA_AQUI'; // Reemplaza con el ID de la foto de Lía
         
         // ============================================
-        // CONTROL DE MÚSICA DE FONDO
+        // ACTUALIZAR URLs DE ARCHIVOS
+        // ============================================
+        if (FOTO_LIA_ID !== 'ID_FOTO_LIA_AQUI') {
+            document.querySelector('.photo-frame:last-child img').src = `https://drive.google.com/uc?export=view&id=${FOTO_LIA_ID}`;
+        }
+        
+        // ============================================
+        // CONTROL DE MÚSICA
         // ============================================
         let musicaActivada = false;
         const audio = document.getElementById('bgMusic');
         const musicControl = document.getElementById('musicControl');
         
-        // Intentar reproducir automáticamente al cargar (muchos navegadores lo bloquean)
-        document.addEventListener('DOMContentLoaded', function() {
-            // Actualizar fuente de audio si se proporcionó
-            if (MUSICA_URL !== 'URL_DE_TU_CANCION_AQUI.mp3') {
-                audio.src = MUSICA_URL;
-            }
-            
-            // Intentar reproducir (puede ser bloqueado por el navegador)
-            audio.play().then(() => {
-                musicaActivada = true;
-                musicControl.innerHTML = '🔊';
-                musicControl.classList.add('playing');
-            }).catch(error => {
-                console.log('Autoplay bloqueado por el navegador');
-                musicControl.innerHTML = '🔈';
-            });
-        });
+        // Actualizar fuente de audio
+        if (AUDIO_ID !== 'ID_DEL_AUDIO_AQUI') {
+            audio.src = `https://drive.google.com/uc?export=view&id=${AUDIO_ID}`;
+        }
         
         function toggleMusic() {
             if (musicaActivada) {
@@ -769,7 +758,7 @@
         }
 
         // ============================================
-        // GESTIÓN DE CONFIRMACIONES LOCALES
+        // GESTIÓN DE CONFIRMACIONES - VERSIÓN CORREGIDA
         // ============================================
         
         const STORAGE_KEY = 'confirmacionesFiestaGiaLia';
@@ -790,45 +779,72 @@
             document.getElementById('asistentesCount').textContent = asistentes;
         }
         
-        // Manejar envío del formulario
-        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-            // Validar campos
+        // Manejar envío del formulario SIN abrir nueva pestaña
+        document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
+            e.preventDefault(); // Prevenir envío normal
+            
             const nombre = document.getElementById('nombre').value.trim();
             const adultos = document.getElementById('adultos').value;
             const ninos = document.getElementById('ninos').value;
             const confirmacion = document.getElementById('confirmacion').value;
             
             if (!nombre || !adultos || !ninos || !confirmacion) {
-                e.preventDefault();
                 mostrarMensaje('error', '❌ Por favor, completa todos los campos');
                 return;
             }
             
-            // Guardar en localStorage para el contador
-            const nuevaConfirmacion = {
-                nombre: nombre,
-                adultos: adultos,
-                ninos: ninos,
-                confirmacion: confirmacion,
-                fecha: new Date().toLocaleString('es-CL')
-            };
+            mostrarMensaje('loading', '⏳ Enviando confirmación...');
             
-            confirmaciones.push(nuevaConfirmacion);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(confirmaciones));
-            actualizarContador();
-            
-            // Mostrar mensaje de éxito (se abrirá Framaforms en nueva pestaña)
-            mostrarMensaje('success', '✅ ¡Gracias por confirmar! Se abrirá el formulario.');
-            
-            // El formulario se envía normalmente a Framaforms (target="_blank")
+            try {
+                // Enviar datos a Framaforms mediante fetch (AJAX)
+                const formData = new FormData(this);
+                
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors' // Importante para evitar problemas CORS
+                });
+                
+                // Guardar en localStorage
+                const nuevaConfirmacion = {
+                    nombre: nombre,
+                    adultos: adultos,
+                    ninos: ninos,
+                    confirmacion: confirmacion,
+                    fecha: new Date().toLocaleString('es-CL')
+                };
+                
+                confirmaciones.push(nuevaConfirmacion);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(confirmaciones));
+                actualizarContador();
+                
+                // Mensaje de éxito
+                let mensajeExito = '';
+                if (confirmacion === '1') {
+                    mensajeExito = '✅ ¡Gracias por confirmar! Te esperamos en la fiesta.';
+                } else if (confirmacion === '2') {
+                    mensajeExito = '😢 Lamentamos que no puedas asistir. ¡Gracias por avisar!';
+                } else {
+                    mensajeExito = '👍 Gracias por tu respuesta. ¡Esperamos verte!';
+                }
+                
+                mostrarMensaje('success', mensajeExito);
+                
+                // Limpiar formulario
+                this.reset();
+                document.getElementById('adultos').value = '1';
+                document.getElementById('ninos').value = '0';
+                
+            } catch (error) {
+                console.error('Error:', error);
+                mostrarMensaje('error', '❌ Error al enviar. Intenta de nuevo.');
+            }
         });
         
-        // Función para la alerta de próximamente
         function mostrarAlertaProximamente() {
-            alert('📸 ¡Esta función se habilitará el día de la fiesta! 🎉\n\nTe esperamos el 07 de Marzo para compartir tus fotos.');
+            alert('📸 ¡Esta función se habilitará el día de la fiesta! 🎉');
         }
         
-        // Inicializar contador
         actualizarContador();
     </script>
 </body>
