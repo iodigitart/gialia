@@ -640,169 +640,70 @@
                 </div>
             </div>
 
-            <!-- FORMULARIO DE CONFIRMACIÓN - CONECTADO A GOOGLE SHEETS -->
-            <div class="rsvp-form">
-                <h2>✨ Confirma tu asistencia ✨</h2>
-                
-                <!-- Mensajes de estado -->
-                <div id="confirmationMessage" class="confirmation-message"></div>
-
-                <!-- Formulario de confirmación -->
-                <div class="form-group">
-                    <label for="nombre-papa">Nombre del papá/mamá:</label>
-                    <input type="text" id="nombre-papa" placeholder="Ej: Juan Pérez" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="nombre-nino">Nombre del niño/niña:</label>
-                    <input type="text" id="nombre-nino" placeholder="Ej: Sofía" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="edad-nino">Edad del niño/niña:</label>
-                    <select id="edad-nino" required>
-                        <option value="">Selecciona una edad</option>
-                        <option value="1 año">1 año</option>
-                        <option value="2 años">2 años</option>
-                        <option value="3 años">3 años</option>
-                        <option value="4 años">4 años</option>
-                        <option value="5 años">5 años</option>
-                        <option value="6 años">6 años</option>
-                        <option value="7 años">7 años</option>
-                        <option value="8 años">8 años</option>
-                        <option value="9 años">9 años</option>
-                        <option value="10 años">10 años</option>
-                        <option value="11 años">11 años</option>
-                        <option value="12 años">12 años</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="confirmacion">Confirmación:</label>
-                    <select id="confirmacion" required>
-                        <option value="">Selecciona una opción</option>
-                        <option value="Si, asistiré">✅ ¡Sí, asistiré!</option>
-                        <option value="No podré asistir">❌ No podré asistir</option>
-                        <option value="Tal vez, confirmaré después">🤔 Tal vez, confirmaré después</option>
-                    </select>
-                </div>
-
-                <button class="btn-confirm" onclick="enviarAGoogleSheets()">
-                    Confirmar Asistencia
-                </button>
-                
-                <div class="counter" id="counter">
-                    <p>🎉 <span id="asistentesCount">0</span> familias han confirmado</p>
-                </div>
-            </div>
+            <!-- SECCIÓN DE CONFIRMACIÓN CON FRAMAFORMS (UBICADA ANTES DE LAS FOTOS) -->
+<div class="rsvp-form" style="margin-bottom: 40px;">
+    <h2 style="color: #764ba2; text-align: center; margin-bottom: 25px;">✨ Confirma tu asistencia ✨</h2>
+    
+    <!-- Formulario que envía datos a Framaforms -->
+    <form id="rsvpForm" action="https://framaforms.org/confirmar-asistencia-gialia-1772071202" method="POST" target="_blank">
+        
+        <!-- Campo: Nombre (textfield) -->
+        <div class="form-group">
+            <label for="nombre">Su Nombre <span style="color: #999; font-size: 0.9em;">(Adulto, niño(a) o ambos)</span></label>
+            <input type="text" id="nombre" name="submitted[new_1772071301030]" placeholder="Ej: Juan Pérez" required>
         </div>
-    </div>
 
-    <script>
-        // ============================================
-        // CONFIGURACIÓN - URL DE GOOGLE APPS SCRIPT
-        // ============================================
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwhzBXjCPXEWtBzmEiYs-I2o1qQLFvZxa36vbxNT7FrRVEj8YDuGlW2sor22faj49iLiQ/exec';
+        <!-- Campo: Adultos asistentes (number) -->
+        <div class="form-group">
+            <label for="adultos">¿Cuántos adultos asistirán?</label>
+            <input type="number" id="adultos" name="submitted[new_1772071449722]" min="0" max="20" step="1" value="1" required>
+        </div>
+
+        <!-- Campo: Niños asistentes (number) -->
+        <div class="form-group">
+            <label for="ninos">¿Cuántos niños(as) asistirán?</label>
+            <input type="number" id="ninos" name="submitted[new_1772071502590]" min="0" max="20" step="1" value="0" required>
+        </div>
+
+        <!-- Campo: Confirmación (checkboxes - convertido a select para mejor UX) -->
+        <div class="form-group">
+            <label for="confirmacion">Confirmar asistencia:</label>
+            <select id="confirmacion" name="submitted[new_1772071539642]" required>
+                <option value="">Selecciona una opción</option>
+                <option value="1">✅ Sí, asistiré</option>
+                <option value="2">❌ No podré asistir</option>
+                <option value="3">🤔 Tal vez</option>
+            </select>
+            <small style="color: #666; display: block; margin-top: 5px;">Selecciona una opción</small>
+        </div>
+
+        <!-- Campos ocultos necesarios para Framaforms (protección CSRF) -->
+        <input type="hidden" name="form_build_id" value="form-yM_7X5jQkQkQkQkQkQkQkQkQkQkQkQkQkQkQkQkQ">
+        <input type="hidden" name="form_id" value="webform_client_form_1772071202">
+        <input type="hidden" name="webform_id" value="1772071202">
+
+        <button type="submit" class="btn-confirm">
+            Enviar Confirmación
+        </button>
+    </form>
+    
+    <!-- Mensaje de confirmación (opcional) -->
+    <div id="confirmationMessage" class="confirmation-message" style="margin-top: 15px; display: none;"></div>
+</div>
+
+<!-- Script para manejar el envío del formulario -->
+<script>
+    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+        // Mostrar mensaje de "enviando..."
+        const msgDiv = document.getElementById('confirmationMessage');
+        msgDiv.className = 'confirmation-message loading';
+        msgDiv.style.display = 'block';
+        msgDiv.textContent = '⏳ Enviando confirmación...';
         
-        // ============================================
-        // GESTIÓN DE CONFIRMACIONES
-        // ============================================
-        
-        // Clave para localStorage (solo para el contador local)
-        const STORAGE_KEY = 'confirmacionesFiestaGiaLia';
-        let confirmaciones = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-        
-        // Función para mostrar mensajes
-        function mostrarMensaje(tipo, texto) {
-            const messageDiv = document.getElementById('confirmationMessage');
-            messageDiv.className = `confirmation-message ${tipo}`;
-            messageDiv.textContent = texto;
-            
-            setTimeout(() => {
-                messageDiv.className = 'confirmation-message';
-            }, 5000);
-        }
-        
-        // Actualizar contador de asistentes
-        function actualizarContador() {
-            const asistentes = confirmaciones.filter(c => c.confirmacion === 'Si, asistiré').length;
-            document.getElementById('asistentesCount').textContent = asistentes;
-        }
-        
-        // Función para enviar a Google Sheets
-        async function enviarAGoogleSheets() {
-            // Obtener valores
-            const nombrePapa = document.getElementById('nombre-papa').value.trim();
-            const nombreNino = document.getElementById('nombre-nino').value.trim();
-            const edadNino = document.getElementById('edad-nino').value;
-            const confirmacion = document.getElementById('confirmacion').value;
-            
-            // Validar campos
-            if (!nombrePapa || !nombreNino || !edadNino || !confirmacion) {
-                mostrarMensaje('error', '❌ Por favor, completa todos los campos');
-                return;
-            }
-            
-            // Mostrar loading
-            mostrarMensaje('loading', '⏳ Enviando confirmación...');
-            
-            try {
-                // Preparar datos para enviar
-                const formData = new FormData();
-                formData.append('nombrePapa', nombrePapa);
-                formData.append('nombreNino', nombreNino);
-                formData.append('edadNino', edadNino);
-                formData.append('confirmacion', confirmacion);
-                
-                // Enviar a Google Apps Script
-                const response = await fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    // Guardar también en localStorage para el contador
-                    const nuevaConfirmacion = {
-                        id: result.id,
-                        fecha: new Date().toLocaleString('es-CL'),
-                        nombrePapa: nombrePapa,
-                        nombreNino: nombreNino,
-                        edadNino: edadNino,
-                        confirmacion: confirmacion
-                    };
-                    
-                    confirmaciones.push(nuevaConfirmacion);
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(confirmaciones));
-                    actualizarContador();
-                    
-                    // Mensaje de éxito
-                    let mensajeExito = '';
-                    if (confirmacion === 'Si, asistiré') {
-                        mensajeExito = '✅ ¡Gracias por confirmar! Te esperamos en la fiesta.';
-                    } else if (confirmacion === 'No podré asistir') {
-                        mensajeExito = '😢 Lamentamos que no puedas asistir. ¡Gracias por avisar!';
-                    } else {
-                        mensajeExito = '👍 Esperamos tu confirmación. ¡Mantente atento!';
-                    }
-                    mostrarMensaje('success', mensajeExito);
-                    
-                    // Limpiar formulario
-                    document.getElementById('nombre-papa').value = '';
-                    document.getElementById('nombre-nino').value = '';
-                    document.getElementById('edad-nino').value = '';
-                    document.getElementById('confirmacion').value = '';
-                    
-                } else {
-                    mostrarMensaje('error', '❌ Error al guardar: ' + result.message);
-                }
-                
-            } catch (error) {
-                console.error('Error:', error);
-                mostrarMensaje('error', '❌ Error de conexión. Por favor, intenta de nuevo.');
-            }
-        }
+        // El formulario se envía normalmente a Framaforms
+        // La página se abrirá en una nueva pestaña (target="_blank")
+    });
+</script>
         
         // Función para la alerta de próximamente
         function mostrarAlertaProximamente() {
