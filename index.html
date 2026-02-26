@@ -378,32 +378,51 @@
             font-size: 0.9em;
         }
 
-        /* Control de música */
+        /* Control de música con letrero PLAY! */
         .music-control {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: white;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
+            gap: 5px;
+            background: white;
+            padding: 8px 15px 8px 12px;
+            border-radius: 50px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             z-index: 1000;
             border: 2px solid #764ba2;
+            cursor: pointer;
             transition: all 0.3s;
         }
 
         .music-control:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
+            background: #764ba2;
+            color: white;
+        }
+
+        .music-control:hover .play-text {
+            color: white;
+        }
+
+        .music-icon {
+            font-size: 20px;
+        }
+
+        .play-text {
+            font-size: 14px;
+            font-weight: bold;
+            color: #764ba2;
+            letter-spacing: 0.5px;
         }
 
         .music-control.playing {
             background: #764ba2;
+            color: white;
+        }
+
+        .music-control.playing .play-text {
             color: white;
         }
 
@@ -433,13 +452,26 @@
             .qr-item {
                 width: 100%;
             }
+            
+            .music-control {
+                padding: 6px 12px 6px 10px;
+            }
+            
+            .music-icon {
+                font-size: 18px;
+            }
+            
+            .play-text {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Control de música -->
+    <!-- Control de música con letrero PLAY! -->
     <div class="music-control" id="musicControl" onclick="toggleMusic()">
-        🔈
+        <span class="music-icon" id="musicIcon">🔈</span>
+        <span class="play-text" id="playText">PLAY!</span>
     </div>
 
     <!-- Audio de fondo con ruta absoluta -->
@@ -466,7 +498,7 @@
             <div class="video-section">
                 <h2>🎥 Dale play a la invitación</h2>
                 <div class="video-container">
-                    <video controls poster="https://iodigitart.github.io/gialia/assets/poster.jpg">
+                    <video id="invitationVideo" controls poster="https://iodigitart.github.io/gialia/assets/poster.jpg">
                         <source src="https://iodigitart.github.io/gialia/assets/videoinvitacion.mp4" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
@@ -502,7 +534,7 @@
                 <h2>✨ Confirma tu asistencia ✨</h2>
                 
                 <div class="form-container">
-                    <!-- IFRAME DE GOOGLE FORMS con URL corregida -->
+                    <!-- IFRAME DE GOOGLE FORMS -->
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScNk8RSgVwLBThiigBHZlEqMN2IJj8dyHpNMOvi6c0orI1iUg/viewform?embedded=true" class="google-form-iframe" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
                 </div>
             </div>
@@ -542,31 +574,82 @@
 
     <script>
         // ============================================
-        // CONTROL DE MÚSICA
+        // CONTROL DE MÚSICA Y VIDEO
         // ============================================
-        let musicaActivada = false;
-        const audio = document.getElementById('bgMusic');
-        const musicControl = document.getElementById('musicControl');
         
-        function toggleMusic() {
+        // Obtener elementos
+        const audio = document.getElementById('bgMusic');
+        const video = document.getElementById('invitationVideo');
+        const musicControl = document.getElementById('musicControl');
+        const musicIcon = document.getElementById('musicIcon');
+        const playText = document.getElementById('playText');
+        
+        let musicaActivada = false;
+        
+        // Función para actualizar el control visual
+        function actualizarControl() {
             if (musicaActivada) {
-                audio.pause();
-                musicControl.innerHTML = '🔈';
-                musicControl.classList.remove('playing');
-                musicaActivada = false;
+                musicIcon.textContent = '🔊';
+                musicControl.classList.add('playing');
             } else {
+                musicIcon.textContent = '🔈';
+                musicControl.classList.remove('playing');
+            }
+        }
+        
+        // Función para activar música
+        function activarMusica() {
+            if (!musicaActivada) {
                 audio.play()
                     .then(() => {
-                        musicControl.innerHTML = '🔊';
-                        musicControl.classList.add('playing');
                         musicaActivada = true;
+                        actualizarControl();
                     })
                     .catch(error => {
                         console.log('Error al reproducir:', error);
-                        alert('Haz clic en la página primero para reproducir la música');
+                        alert('Haz clic en "PLAY!" para activar la música');
                     });
             }
         }
+        
+        // Función para pausar música
+        function pausarMusica() {
+            if (musicaActivada) {
+                audio.pause();
+                musicaActivada = false;
+                actualizarControl();
+            }
+        }
+        
+        // Toggle manual de música (cuando hacen clic en el control)
+        function toggleMusic() {
+            if (musicaActivada) {
+                pausarMusica();
+            } else {
+                activarMusica();
+            }
+        }
+        
+        // Eventos del video
+        video.addEventListener('play', function() {
+            pausarMusica(); // Pausar música cuando el video se reproduce
+        });
+        
+        video.addEventListener('pause', function() {
+            // No hacer nada al pausar el video (la música no se reanuda automáticamente)
+        });
+        
+        video.addEventListener('ended', function() {
+            // No hacer nada cuando termina el video (la música no se reanuda automáticamente)
+            // La música se reanudará solo si el usuario hace clic en PLAY!
+        });
+        
+        // También pausar música si el usuario adelanta el video mientras se reproduce
+        video.addEventListener('seeking', function() {
+            if (!video.paused) {
+                pausarMusica();
+            }
+        });
 
         // ============================================
         // FUNCIÓN PARA ALERTA DE PRÓXIMAMENTE
