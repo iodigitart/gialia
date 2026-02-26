@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Invitación K-pop & Capibara - Gia & Lía</title>
     <style>
-        /* Mismos estilos que antes - los mantienes */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
         
         * {
@@ -33,7 +32,7 @@
         }
 
         .invitation-card {
-            max-width: 450px;
+            max-width: 500px;
             width: 100%;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 30px;
@@ -100,6 +99,7 @@
             padding: 20px;
         }
 
+        /* Sección de Video */
         .video-section {
             margin-bottom: 20px;
             text-align: center;
@@ -129,6 +129,7 @@
             object-fit: cover;
         }
 
+        /* Sección de Fotos */
         .photos-section {
             margin-bottom: 20px;
             text-align: center;
@@ -274,7 +275,8 @@
         .theme-icons span:nth-child(4) { animation-delay: 0.6s; }
         .theme-icons span:nth-child(5) { animation-delay: 0.8s; }
 
-        .rsvp-form {
+        /* NUEVA SECCIÓN: Iframe de Framaforms */
+        .framaforms-section {
             background: white;
             padding: 20px;
             border-radius: 20px;
@@ -282,120 +284,43 @@
             margin: 20px 0;
         }
 
-        .rsvp-form h2 {
+        .framaforms-section h2 {
             color: #764ba2;
             margin-bottom: 20px;
             text-align: center;
             font-size: 1.5em;
         }
 
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #333;
-            font-weight: 600;
-            font-size: 0.9em;
-        }
-
-        .form-group input,
-        .form-group select {
+        .form-container {
             width: 100%;
-            padding: 10px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 0.95em;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
-        }
-
-        .btn-confirm {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1.1em;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-            letter-spacing: 1px;
-            width: 100%;
-            position: relative;
+            border-radius: 15px;
             overflow: hidden;
+            background: #f9f9f9;
         }
 
-        .btn-confirm:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        .confirmation-message {
-            margin-top: 15px;
-            padding: 10px;
+        iframe {
+            border: none;
+            width: 100%;
+            height: 650px; /* Altura ajustada para móvil */
             border-radius: 10px;
-            display: none;
-            animation: slideIn 0.5s ease;
-            font-size: 0.9em;
         }
 
-        @keyframes slideIn {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .confirmation-message.success {
-            display: block;
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .confirmation-message.error {
-            display: block;
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .confirmation-message.loading {
-            display: block;
-            background: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeeba;
-        }
-
-        .counter {
+        .counter-small {
             text-align: center;
             margin-top: 15px;
             padding: 10px;
             background: #f0f0f0;
             border-radius: 50px;
-            font-size: 0.95em;
+            font-size: 0.9em;
         }
 
-        .counter span {
+        .counter-small span {
             color: #764ba2;
             font-weight: bold;
-            font-size: 1.3em;
+            font-size: 1.2em;
         }
 
+        /* Sección de Fotos de la Fiesta */
         .photo-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 20px;
@@ -498,6 +423,7 @@
             font-size: 0.9em;
         }
 
+        /* Control de música */
         .music-control {
             position: fixed;
             bottom: 20px;
@@ -526,9 +452,14 @@
             color: white;
         }
 
+        /* Responsive para móvil */
         @media (max-width: 450px) {
             .content {
                 padding: 15px;
+            }
+            
+            iframe {
+                height: 600px; /* Altura ajustada para móviles */
             }
             
             .name-card {
@@ -565,7 +496,7 @@
         🔈
     </div>
 
-    <!-- Audio de fondo (ARCHIVO LOCAL) -->
+    <!-- Audio de fondo -->
     <audio id="bgMusic" loop preload="auto">
         <source src="assets/Hauntrix.mp3" type="audio/mpeg">
         Tu navegador no soporta audio.
@@ -573,7 +504,7 @@
 
     <div class="invitation-card">
         <div class="header">
-            <h1>¡ESTÁS INVITADO(A) A LA DIVERSIÓN!</h1>
+            <h1>¡Fiesta de Cumpleaños!</h1>
             <div class="theme-icons">
                 <span>🎤</span>
                 <span>💜</span>
@@ -581,11 +512,11 @@
                 <span>🎵</span>
                 <span>📸</span>
             </div>
-            <p style="color: white; font-size: 1.1em;">Fiesta de Cumpleaños</p>
+            <p style="color: white; font-size: 1.1em;">K-pop & Capibara</p>
         </div>
 
         <div class="content">
-            <!-- SECCIÓN DE VIDEO (ARCHIVO LOCAL) -->
+            <!-- SECCIÓN DE VIDEO -->
             <div class="video-section">
                 <h2>🎥 Video de Invitación</h2>
                 <div class="video-container">
@@ -597,7 +528,7 @@
                 <p style="margin-top: 8px; color: #666; font-size: 0.9em;">✨ Video de invitación ✨</p>
             </div>
 
-            <!-- SECCIÓN DE FOTOS DE LAS CUMPLEAÑERAS (ARCHIVOS LOCALES) -->
+            <!-- SECCIÓN DE FOTOS DE LAS CUMPLEAÑERAS -->
             <div class="photos-section">
                 <h2>📸 Las Cumpleañeras</h2>
                 <div class="photos-grid">
@@ -612,6 +543,18 @@
                 </div>
             </div>
 
+            <!-- NOMBRES Y EDADES -->
+            <div class="names">
+                <div class="name-card">
+                    <h2>Gia Luciana</h2>
+                    <div class="age">6 años</div>
+                </div>
+                <div class="name-card">
+                    <h2>Lía Salomé</h2>
+                    <div class="age">9 años</div>
+                </div>
+            </div>
+
             <!-- DETALLES DEL EVENTO -->
             <div class="details">
                 <p>📅 <strong>Fecha:</strong> Sábado 07 Marzo, 2026</p>
@@ -620,117 +563,20 @@
                 <p>🏠 <strong>Dirección:</strong> Malaquías Concha 0310 - Providencia</p>
             </div>
 
-            <!-- SECCIÓN DE CONFIRMACIÓN - CÓDIGO DIRECTO DE FRAMAFORMS -->
-<div class="rsvp-form">
-    <h2 style="color: #764ba2; margin-bottom: 20px; text-align: center;">✨ Confirma tu asistencia ✨</h2>
-    
-    <div id="confirmationMessage" class="confirmation-message" style="display: none;"></div>
-
-    <!-- FORMULARIO DIRECTO DE FRAMAFORMS -->
-    <form id="rsvpForm" action="https://framaforms.org/confirmar-asistencia-gialia-1772071202" method="post" accept-charset="UTF-8">
-        
-        <div class="form-group">
-            <label for="edit-submitted-new-1772071301030">Tu Nombre <span style="color: #999; font-size: 0.85em;">(Adulto, niño/a o ambos)</span></label>
-            <input type="text" id="edit-submitted-new-1772071301030" name="submitted[new_1772071301030]" value="" size="60" maxlength="128" class="form-text" required>
-        </div>
-
-        <div class="form-group">
-            <label for="edit-submitted-new-1772071449722">¿Cuántos adultos asistirán?</label>
-            <input type="number" id="edit-submitted-new-1772071449722" name="submitted[new_1772071449722]" min="0" max="20" step="1" value="1" class="form-text form-number" required>
-        </div>
-
-        <div class="form-group">
-            <label for="edit-submitted-new-1772071502590">¿Cuántos niños(as) asistirán?</label>
-            <input type="number" id="edit-submitted-new-1772071502590" name="submitted[new_1772071502590]" min="0" max="20" step="1" value="0" class="form-text form-number" required>
-        </div>
-
-        <div class="form-group">
-            <label>Confirmar asistencia:</label>
-            <div style="display: flex; gap: 20px; justify-content: center; margin-top: 10px;">
-                <label style="display: flex; align-items: center; gap: 5px;">
-                    <input type="radio" name="submitted[new_1772071539642]" value="1" required> ✅ Sí
-                </label>
-                <label style="display: flex; align-items: center; gap: 5px;">
-                    <input type="radio" name="submitted[new_1772071539642]" value="2" required> ❌ No
-                </label>
-                <label style="display: flex; align-items: center; gap: 5px;">
-                    <input type="radio" name="submitted[new_1772071539642]" value="3" required> 🤔 Tal vez
-                </label>
+            <!-- NUEVA SECCIÓN: FORMULARIO DE FRAMAFORMS CON IFRAME -->
+            <div class="framaforms-section">
+                <h2>✨ Confirma tu asistencia ✨</h2>
+                
+                <div class="form-container">
+                    <!-- IFRAME DE FRAMAFORMS (CÓDIGO PROPORCIONADO) -->
+                    <iframe src="https://framaforms.org/confirmar-asistencia-gialia-1772071202" width="100%" height="650" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" allowtransparency="true"></iframe>
+                </div>
+                
+                <!-- Contador local (solo decorativo) -->
+                <div class="counter-small">
+                    <p>🎉 <span id="asistentesCount">0</span> familias han marcado "Sí" en este navegador</p>
+                </div>
             </div>
-        </div>
-
-        <!-- Campos ocultos necesarios para Framaforms -->
-        <input type="hidden" name="form_build_id" value="form-yM_7X5jQkQkQkQkQkQkQkQkQkQkQkQkQkQkQkQkQ">
-        <input type="hidden" name="form_id" value="webform_client_form_1772071202">
-        <input type="hidden" name="webform_id" value="1772071202">
-
-        <button type="submit" class="btn-confirm" id="submitBtn">
-            Enviar Confirmación
-        </button>
-    </form>
-    
-    <!-- Contador local (solo visible para el usuario) -->
-    <div class="counter" style="margin-top: 20px;">
-        <p>🎉 <span id="asistentesCount">0</span> familias han confirmado (según tu navegador)</p>
-    </div>
-</div>
-
-<script>
-    // ============================================
-    // GESTIÓN DE CONFIRMACIONES LOCALES (SOLO CONTADOR)
-    // ============================================
-    
-    const STORAGE_KEY = 'confirmacionesFiestaGiaLia';
-    let confirmaciones = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-    
-    function actualizarContador() {
-        const asistentes = confirmaciones.filter(c => c.confirmacion === '1' || c.confirmacion === 'Si, asistiré').length;
-        document.getElementById('asistentesCount').textContent = asistentes;
-    }
-    
-    // Manejar envío del formulario
-    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-        // Validar que todos los campos estén llenos
-        const nombre = document.getElementById('edit-submitted-new-1772071301030').value.trim();
-        const adultos = document.getElementById('edit-submitted-new-1772071449722').value;
-        const ninos = document.getElementById('edit-submitted-new-1772071502590').value;
-        const confirmacion = document.querySelector('input[name="submitted[new_1772071539642]"]:checked');
-        
-        if (!nombre || !adultos || !ninos || !confirmacion) {
-            e.preventDefault();
-            const messageDiv = document.getElementById('confirmationMessage');
-            messageDiv.style.display = 'block';
-            messageDiv.className = 'confirmation-message error';
-            messageDiv.textContent = '❌ Por favor, completa todos los campos';
-            setTimeout(() => messageDiv.style.display = 'none', 3000);
-            return false;
-        }
-        
-        // Guardar en localStorage para el contador local
-        const nuevaConfirmacion = {
-            nombre: nombre,
-            adultos: adultos,
-            ninos: ninos,
-            confirmacion: confirmacion.value,
-            fecha: new Date().toLocaleString('es-CL')
-        };
-        
-        confirmaciones.push(nuevaConfirmacion);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(confirmaciones));
-        actualizarContador();
-        
-        // Mostrar mensaje de éxito
-        const messageDiv = document.getElementById('confirmationMessage');
-        messageDiv.style.display = 'block';
-        messageDiv.className = 'confirmation-message success';
-        messageDiv.textContent = '✅ ¡Gracias por confirmar! Redirigiendo...';
-        
-        // El formulario se envía normalmente a Framaforms
-        return true;
-    });
-    
-    actualizarContador();
-</script>
 
             <!-- SECCIÓN DE FOTOS DE LA FIESTA -->
             <div class="photo-section">
@@ -794,83 +640,29 @@
         }
 
         // ============================================
-        // GESTIÓN DE CONFIRMACIONES
+        // CONTADOR LOCAL (SOLO DECORATIVO)
         // ============================================
         
         const STORAGE_KEY = 'confirmacionesFiestaGiaLia';
         let confirmaciones = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-        let envioExitoso = false;
-        
-        function mostrarMensaje(tipo, texto) {
-            const messageDiv = document.getElementById('confirmationMessage');
-            messageDiv.className = `confirmation-message ${tipo}`;
-            messageDiv.textContent = texto;
-            
-            setTimeout(() => {
-                messageDiv.className = 'confirmation-message';
-            }, 4000);
-        }
         
         function actualizarContador() {
-            const asistentes = confirmaciones.filter(c => c.confirmacion === '1' || c.confirmacion === 'Si, asistiré').length;
+            const asistentes = confirmaciones.filter(c => c.confirmacion === 'Si asistiré').length;
             document.getElementById('asistentesCount').textContent = asistentes;
         }
         
-        document.getElementById('hidden_iframe').onload = function() {
-            if (envioExitoso) {
-                const nombre = document.getElementById('nombre').value.trim();
-                const adultos = document.getElementById('adultos').value;
-                const ninos = document.getElementById('ninos').value;
-                const confirmacion = document.getElementById('confirmacion').value;
-                
-                const nuevaConfirmacion = {
-                    nombre: nombre,
-                    adultos: adultos,
-                    ninos: ninos,
-                    confirmacion: confirmacion,
+        // Función para guardar cuando alguien confirma (opcional - el iframe no puede comunicarse directamente)
+        // Esto es solo para que el usuario pueda marcar manualmente si quiere
+        function marcarConfirmacionLocal() {
+            if(confirm('¿Marcar como que confirmaste? (Esto solo actualiza el contador local)')) {
+                confirmaciones.push({
+                    confirmacion: 'Si asistiré',
                     fecha: new Date().toLocaleString('es-CL')
-                };
-                
-                confirmaciones.push(nuevaConfirmacion);
+                });
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(confirmaciones));
                 actualizarContador();
-                
-                let mensajeExito = '';
-                if (confirmacion === '1') {
-                    mensajeExito = '✅ ¡Gracias por confirmar! Te esperamos en la fiesta.';
-                } else if (confirmacion === '2') {
-                    mensajeExito = '😢 Lamentamos que no puedas asistir. ¡Gracias por avisar!';
-                } else {
-                    mensajeExito = '👍 Gracias por tu respuesta. ¡Esperamos verte!';
-                }
-                
-                mostrarMensaje('success', mensajeExito);
-                
-                document.getElementById('rsvpForm').reset();
-                document.getElementById('adultos').value = '1';
-                document.getElementById('ninos').value = '0';
-                
-                envioExitoso = false;
             }
-        };
-        
-        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-            const nombre = document.getElementById('nombre').value.trim();
-            const adultos = document.getElementById('adultos').value;
-            const ninos = document.getElementById('ninos').value;
-            const confirmacion = document.getElementById('confirmacion').value;
-            
-            if (!nombre || !adultos || !ninos || !confirmacion) {
-                e.preventDefault();
-                mostrarMensaje('error', '❌ Por favor, completa todos los campos');
-                return false;
-            }
-            
-            envioExitoso = true;
-            mostrarMensaje('loading', '⏳ Enviando confirmación...');
-            
-            return true;
-        });
+        }
         
         function mostrarAlertaProximamente() {
             alert('📸 ¡Esta función se habilitará el día de la fiesta! 🎉');
