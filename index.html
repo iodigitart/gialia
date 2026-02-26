@@ -275,8 +275,8 @@
         .theme-icons span:nth-child(4) { animation-delay: 0.6s; }
         .theme-icons span:nth-child(5) { animation-delay: 0.8s; }
 
-        /* NUEVA SECCIÓN: Iframe de Framaforms */
-        .framaforms-section {
+        /* Sección del Formulario Google Forms */
+        .google-form-section {
             background: white;
             padding: 20px;
             border-radius: 20px;
@@ -284,7 +284,7 @@
             margin: 20px 0;
         }
 
-        .framaforms-section h2 {
+        .google-form-section h2 {
             color: #764ba2;
             margin-bottom: 20px;
             text-align: center;
@@ -298,10 +298,10 @@
             background: #f9f9f9;
         }
 
-        iframe {
-            border: none;
+        .google-form-iframe {
             width: 100%;
-            height: 650px; /* Altura ajustada para móvil */
+            height: 550px;
+            border: none;
             border-radius: 10px;
         }
 
@@ -458,8 +458,8 @@
                 padding: 15px;
             }
             
-            iframe {
-                height: 600px; /* Altura ajustada para móviles */
+            .google-form-iframe {
+                height: 500px;
             }
             
             .name-card {
@@ -563,13 +563,13 @@
                 <p>🏠 <strong>Dirección:</strong> Malaquías Concha 0310 - Providencia</p>
             </div>
 
-            <!-- NUEVA SECCIÓN: FORMULARIO DE FRAMAFORMS CON IFRAME -->
-            <div class="framaforms-section">
+            <!-- NUEVA SECCIÓN: FORMULARIO DE GOOGLE FORMS -->
+            <div class="google-form-section">
                 <h2>✨ Confirma tu asistencia ✨</h2>
                 
                 <div class="form-container">
-                    <!-- IFRAME DE FRAMAFORMS (CÓDIGO PROPORCIONADO) -->
-                    <iframe src="https://framaforms.org/confirmar-asistencia-gialia-1772071202" width="100%" height="650" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" allowtransparency="true"></iframe>
+                    <!-- IFRAME DE GOOGLE FORMS - CÓDIGO CORREGIDO -->
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScNk8RSgVwLBThiigBHZlEqMN2IJj8dyHpNMOvi6c0orI1iUg/viewform?embedded=true" class="google-form-iframe" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
                 </div>
                 
                 <!-- Contador local (solo decorativo) -->
@@ -649,19 +649,6 @@
         function actualizarContador() {
             const asistentes = confirmaciones.filter(c => c.confirmacion === 'Si asistiré').length;
             document.getElementById('asistentesCount').textContent = asistentes;
-        }
-        
-        // Función para guardar cuando alguien confirma (opcional - el iframe no puede comunicarse directamente)
-        // Esto es solo para que el usuario pueda marcar manualmente si quiere
-        function marcarConfirmacionLocal() {
-            if(confirm('¿Marcar como que confirmaste? (Esto solo actualiza el contador local)')) {
-                confirmaciones.push({
-                    confirmacion: 'Si asistiré',
-                    fecha: new Date().toLocaleString('es-CL')
-                });
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(confirmaciones));
-                actualizarContador();
-            }
         }
         
         function mostrarAlertaProximamente() {
