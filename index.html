@@ -275,7 +275,7 @@
             border-radius: 10px;
         }
 
-        /* Sección de Fotos de la Fiesta */
+        /* NUEVA SECCIÓN: Fotos de la Fiesta CON CUENTA REGRESIVA */
         .photo-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 20px;
@@ -291,6 +291,18 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
+        .countdown-banner {
+            background: rgba(255, 215, 0, 0.9);
+            color: #764ba2;
+            padding: 15px;
+            border-radius: 50px;
+            margin: 15px 0;
+            font-weight: bold;
+            animation: pulse 2s ease-in-out infinite;
+            border: 2px solid white;
+            font-size: 1.1em;
+        }
+
         .photo-buttons {
             display: flex;
             justify-content: center;
@@ -300,20 +312,20 @@
         }
 
         .photo-btn {
-            padding: 12px 20px;
+            padding: 15px 20px;
             border: none;
             border-radius: 50px;
-            font-size: 1em;
+            font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             text-decoration: none;
             flex: 1;
-            min-width: 130px;
+            min-width: 140px;
             justify-content: center;
         }
 
@@ -322,7 +334,7 @@
             color: #764ba2;
         }
 
-        .photo-btn.upload:hover {
+        .photo-btn.upload:hover:not(.disabled) {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(255,215,0,0.4);
         }
@@ -332,9 +344,16 @@
             color: white;
         }
 
-        .photo-btn.gallery:hover {
+        .photo-btn.gallery:hover:not(.disabled) {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(255,107,107,0.4);
+        }
+
+        .photo-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+            filter: grayscale(0.3);
         }
 
         .qr-codes {
@@ -364,18 +383,6 @@
 
         .qr-item p {
             font-size: 0.85em;
-        }
-
-        .coming-soon-alert {
-            background: rgba(255, 215, 0, 0.9);
-            color: #764ba2;
-            padding: 10px;
-            border-radius: 50px;
-            margin: 15px 0;
-            font-weight: bold;
-            animation: pulse 2s ease-in-out infinite;
-            border: 2px solid white;
-            font-size: 0.9em;
         }
 
         /* Control de música con letrero PLAY! */
@@ -494,7 +501,7 @@
         </div>
 
         <div class="content">
-            <!-- SECCIÓN DE VIDEO con ruta absoluta -->
+            <!-- SECCIÓN DE VIDEO -->
             <div class="video-section">
                 <h2>🎥 Dale play a la invitación</h2>
                 <div class="video-container">
@@ -506,7 +513,7 @@
                 <p style="margin-top: 8px; color: #666; font-size: 0.9em;">✨ Video de invitación ✨</p>
             </div>
 
-            <!-- SECCIÓN DE FOTOS DE LAS CUMPLEAÑERAS con rutas absolutas -->
+            <!-- SECCIÓN DE FOTOS DE LAS CUMPLEAÑERAS -->
             <div class="photos-section">
                 <h2>📸 Las Cumpleañeras</h2>
                 <div class="photos-grid">
@@ -534,38 +541,40 @@
                 <h2>✨ Confirma tu asistencia ✨</h2>
                 
                 <div class="form-container">
-                    <!-- IFRAME DE GOOGLE FORMS -->
                     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScNk8RSgVwLBThiigBHZlEqMN2IJj8dyHpNMOvi6c0orI1iUg/viewform?embedded=true" class="google-form-iframe" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
                 </div>
             </div>
 
-            <!-- SECCIÓN DE FOTOS DE LA FIESTA -->
+            <!-- NUEVA SECCIÓN: Fotos de la Fiesta CON CUENTA REGRESIVA -->
             <div class="photo-section">
                 <h2>📸 ¡Comparte los momentos de la fiesta!</h2>
                 
-                <div class="coming-soon-alert">
-                    ⏰ ¡Se habilitará el día de la fiesta! ⏰
+                <!-- BANNER DE CUENTA REGRESIVA -->
+                <div id="countdownBanner" class="countdown-banner">
+                    ⏰ Verificando fecha del evento...
                 </div>
                 
+                <!-- BOTONES (se activarán el 7 de Marzo) -->
                 <div class="photo-buttons">
-                    <button class="photo-btn upload" onclick="mostrarAlertaProximamente()">
+                    <div id="uploadBtn" class="photo-btn upload disabled">
                         <span>📤</span> Sube tu foto aquí
-                    </button>
-                    <button class="photo-btn gallery" onclick="mostrarAlertaProximamente()">
+                    </div>
+                    <div id="galleryBtn" class="photo-btn gallery disabled">
                         <span>📱</span> Mira la galería de fotos
-                    </button>
+                    </div>
                 </div>
 
+                <!-- QR Codes (también se activarán) -->
                 <div class="qr-codes">
-                    <div class="qr-item">
+                    <div class="qr-item" id="qrUpload">
                         <p>📤 Subir fotos</p>
                         <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=PROXIMAMENTE&choe=UTF-8" alt="QR Subir">
-                        <p style="font-size: 0.75em;">(Próximamente)</p>
+                        <p style="font-size: 0.75em;" id="qrUploadText">(Próximamente)</p>
                     </div>
-                    <div class="qr-item">
+                    <div class="qr-item" id="qrGallery">
                         <p>📱 Ver galería</p>
                         <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=PROXIMAMENTE&choe=UTF-8" alt="QR Galería">
-                        <p style="font-size: 0.75em;">(Próximamente)</p>
+                        <p style="font-size: 0.75em;" id="qrGalleryText">(Próximamente)</p>
                     </div>
                 </div>
             </div>
@@ -573,6 +582,79 @@
     </div>
 
     <script>
+        // ============================================
+        // CONFIGURACIÓN DE LA FECHA DEL EVENTO
+        // ============================================
+        const FECHA_EVENTO = new Date('2026-03-07T15:00:00'); // 7 de Marzo 2026, 15:00 hrs
+        const LINKS = {
+            subir: 'https://www.dropbox.com/request/YVkdmyDkStXITn2Sx56B',
+            galeria: 'https://www.dropbox.com/scl/fo/iekma54072cmqxrol1q19/AGgNoHzCiqPOVLni8lBDK-g?rlkey=2xbapcw3s4phdvp87jx6gm5x6&st=wz48xngs&dl=0'
+        };
+
+        // ============================================
+        // FUNCIÓN PARA VERIFICAR LA FECHA
+        // ============================================
+        function verificarFecha() {
+            const ahora = new Date();
+            const diffMs = FECHA_EVENTO - ahora;
+            const diffDias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const diffHoras = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const diffMinutos = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+            
+            const countdownBanner = document.getElementById('countdownBanner');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const galleryBtn = document.getElementById('galleryBtn');
+            const qrUpload = document.getElementById('qrUpload');
+            const qrGallery = document.getElementById('qrGallery');
+            const qrUploadText = document.getElementById('qrUploadText');
+            const qrGalleryText = document.getElementById('qrGalleryText');
+            
+            if (ahora >= FECHA_EVENTO) {
+                // ✅ ACTIVAR BOTONES
+                countdownBanner.innerHTML = '🎉 ¡HOY ES EL GRAN DÍA! ¡Comparte tus fotos! 🎉';
+                countdownBanner.style.background = '#ffd700';
+                countdownBanner.style.color = '#764ba2';
+                
+                // Activar botones de subida
+                uploadBtn.outerHTML = `<a href="${LINKS.subir}" class="photo-btn upload" target="_blank" rel="noopener noreferrer"><span>📤</span> Sube tu foto aquí</a>`;
+                galleryBtn.outerHTML = `<a href="${LINKS.galeria}" class="photo-btn gallery" target="_blank" rel="noopener noreferrer"><span>📱</span> Mira la galería de fotos</a>`;
+                
+                // Actualizar QR codes
+                qrUpload.innerHTML = `
+                    <p>📤 Subir fotos</p>
+                    <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=${encodeURIComponent(LINKS.subir)}&choe=UTF-8" alt="QR Subir">
+                    <p style="font-size: 0.75em;">Escanea para subir</p>
+                `;
+                qrGallery.innerHTML = `
+                    <p>📱 Ver galería</p>
+                    <img src="https://chart.googleapis.com/chart?chs=100x100&cht=qr&chl=${encodeURIComponent(LINKS.galeria)}&choe=UTF-8" alt="QR Galería">
+                    <p style="font-size: 0.75em;">Escanea para ver</p>
+                `;
+                
+            } else if (diffDias > 0) {
+                // ⏳ FALTAN DÍAS
+                countdownBanner.innerHTML = `⏳ Faltan ${diffDias} día${diffDias !== 1 ? 's' : ''} para compartir fotos`;
+                countdownBanner.style.background = 'rgba(255, 215, 0, 0.9)';
+                countdownBanner.style.color = '#764ba2';
+                
+                // Mantener botones desactivados
+                uploadBtn.classList.add('disabled');
+                galleryBtn.classList.add('disabled');
+                
+                // Mantener QR como "Próximamente"
+                qrUploadText.textContent = '(Próximamente)';
+                qrGalleryText.textContent = '(Próximamente)';
+                
+            } else if (diffHoras > 0) {
+                // ⏳ FALTAN HORAS
+                countdownBanner.innerHTML = `⏳ Faltan ${diffHoras} hora${diffHoras !== 1 ? 's' : ''} para la fiesta`;
+                
+            } else if (diffMinutos > 0) {
+                // ⏳ FALTAN MINUTOS
+                countdownBanner.innerHTML = `⏳ Faltan ${diffMinutos} minuto${diffMinutos !== 1 ? 's' : ''} para la fiesta`;
+            }
+        }
+
         // ============================================
         // CONTROL DE MÚSICA Y VIDEO
         // ============================================
@@ -586,7 +668,6 @@
         
         let musicaActivada = false;
         
-        // Función para actualizar el control visual
         function actualizarControl() {
             if (musicaActivada) {
                 musicIcon.textContent = '🔊';
@@ -597,7 +678,6 @@
             }
         }
         
-        // Función para activar música
         function activarMusica() {
             if (!musicaActivada) {
                 audio.play()
@@ -607,12 +687,10 @@
                     })
                     .catch(error => {
                         console.log('Error al reproducir:', error);
-                        alert('Haz clic en "PLAY!" para activar la música');
                     });
             }
         }
         
-        // Función para pausar música
         function pausarMusica() {
             if (musicaActivada) {
                 audio.pause();
@@ -621,7 +699,6 @@
             }
         }
         
-        // Toggle manual de música (cuando hacen clic en el control)
         function toggleMusic() {
             if (musicaActivada) {
                 pausarMusica();
@@ -632,19 +709,17 @@
         
         // Eventos del video
         video.addEventListener('play', function() {
-            pausarMusica(); // Pausar música cuando el video se reproduce
+            pausarMusica();
         });
         
         video.addEventListener('pause', function() {
-            // No hacer nada al pausar el video (la música no se reanuda automáticamente)
+            // No hacer nada
         });
         
         video.addEventListener('ended', function() {
-            // No hacer nada cuando termina el video (la música no se reanuda automáticamente)
-            // La música se reanudará solo si el usuario hace clic en PLAY!
+            // No hacer nada
         });
         
-        // También pausar música si el usuario adelanta el video mientras se reproduce
         video.addEventListener('seeking', function() {
             if (!video.paused) {
                 pausarMusica();
@@ -652,12 +727,12 @@
         });
 
         // ============================================
-        // FUNCIÓN PARA ALERTA DE PRÓXIMAMENTE
+        // INICIALIZAR
         // ============================================
         
-        function mostrarAlertaProximamente() {
-            alert('📸 ¡Esta función se habilitará el día de la fiesta! 🎉');
-        }
+        // Verificar fecha cada minuto
+        verificarFecha();
+        setInterval(verificarFecha, 60000);
     </script>
 </body>
 </html>
