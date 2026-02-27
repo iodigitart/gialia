@@ -225,6 +225,40 @@
             font-weight: bold;
         }
 
+        .tip-box {
+            background: #e8f4fd;
+            border-left: 4px solid #0066cc;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .tip-box p {
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+
+        .tip-box .step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+        }
+
+        .step-number {
+            background: #0066cc;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
         .dropbox-badge {
             background: #0061FF;
             color: white;
@@ -266,46 +300,68 @@
             <p style="color: white; font-size: 1.1em;">Cumpleaños Gia & Lía</p>
         </div>
 
-        <!-- Instrucciones para subir fotos -->
+        <!-- INSTRUCCIONES PARA SUBIR FOTOS -->
         <div class="instructions">
-            <h3>📋 ¡Así funciona!</h3>
+            <h3>📤 Para SUBIR tus fotos:</h3>
             <p><span class="highlight">1️⃣</span> Haz clic en <strong>"Subir fotos"</strong></p>
             <p><span class="highlight">2️⃣</span> Se abrirá la página de Dropbox</p>
-            <p><span class="highlight">3️⃣</span> Selecciona las fotos desde tu celular 📱</p>
-            <p><span class="highlight">4️⃣</span> Escribe tu nombre (para identificar quién subió)</p>
+            <p><span class="highlight">3️⃣</span> Selecciona tus fotos/videos 📱</p>
+            <p><span class="highlight">4️⃣</span> Escribe tu nombre (opcional)</p>
             <p><span class="highlight">5️⃣</span> ¡Listo! Aparecerán en la galería</p>
-            <p style="margin-top: 10px; font-size: 0.9em;">✅ No necesitas cuenta de Dropbox</p>
-            <p style="margin-top: 5px; font-size: 0.9em;">✅ Puedes subir fotos y videos</p>
-            <div class="dropbox-badge">
-                <span>📦</span> Dropbox File Request
-            </div>
         </div>
 
-        <!-- BOTONES GRANDES CON TUS LINKS -->
+        <!-- INSTRUCCIONES PARA VER GALERÍA -->
+        <div class="tip-box">
+            <h3 style="color: #0066cc; margin-bottom: 10px;">👀 Para VER la galería:</h3>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <span>Haz clic en <strong>"Ver galería"</strong></span>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <span>Se abrirá Dropbox (puede pedirte que descargues la app)</span>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                <span><strong>Importante:</strong> Busca el texto pequeño que dice <span style="background: #f0f0f0; padding: 2px 5px; border-radius: 3px;">"Ver desde la web"</span> o <span style="background: #f0f0f0; padding: 2px 5px; border-radius: 3px;">"Continue to website"</span></span>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">4</span>
+                <span>Haz clic ahí y podrás <strong>ver todas las fotos</strong> sin descargar nada</span>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">5</span>
+                <span>También puedes <strong>descargar</strong> las que quieras</span>
+            </div>
+            
+            <p style="margin-top: 12px; background: #fff3cd; padding: 8px; border-radius: 5px; border-left: 4px solid #ffc107;">
+                💡 <strong>Tip:</strong> Busca el link pequeño "Ver desde la web" abajo del botón grande de descargar app
+            </p>
+        </div>
+
+        <!-- BOTONES SIEMPRE ACTIVOS -->
         <div class="photo-buttons">
-            <!-- Link de solicitud de archivos (subir fotos) -->
             <a href="https://www.dropbox.com/request/YVkdmyDkStXITn2Sx56B" 
                class="big-btn upload" 
-               target="_blank"
+               target="_blank" 
                rel="noopener noreferrer">
                 <span class="icon">📤</span>
                 <span class="text">Subir fotos</span>
             </a>
             
-            <!-- Link de carpeta compartida (ver galería) -->
-            <a href="https://www.dropbox.com/scl/fo/iekma54072cmqxrol1q19/AGgNoHzCiqPOVLni8lBDK-g?rlkey=2xbapcw3s4phdvp87jx6gm5x6&st=wz48xngs&dl=1" 
+            <a href="https://www.dropbox.com/scl/fo/iekma54072cmqxrol1q19/AGgNoHzCiqPOVLni8lBDK-g?rlkey=2xbapcw3s4phdvp87jx6gm5x6&st=wz48ngs&dl=0" 
                class="big-btn gallery" 
-               target="_blank"
+               target="_blank" 
                rel="noopener noreferrer">
                 <span class="icon">📱</span>
                 <span class="text">Ver galería</span>
             </a>
         </div>
-
-        <!-- Mensaje de confirmación -->
-        <p style="margin: 15px 0; color: #666; font-size: 0.9em;">
-            ⭐ ¡Todas las fotos se irán sumando a la galería!
-        </p>
 
         <!-- BOTÓN PARA VOLVER A LA INVITACIÓN -->
         <a href="index.html" class="back-btn">← Volver a la invitación</a>
